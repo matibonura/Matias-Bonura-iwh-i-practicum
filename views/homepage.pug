@@ -1,0 +1,22 @@
+doctype html
+html 
+  head 
+    title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body    
+    h1 Lista de Programas Estudiantiles
+    a(href="/update-cobj") Agregar un nuevo programa
+
+    table
+      thead
+        tr
+          th Nombre del programa
+          th Estado
+          th Modalidad
+      tbody
+        each programa in data
+          tr
+            td #{programa.properties.nombre_del_programa}
+            td #{programa.properties.estado}
+            td #{programa.properties.modalidad}
