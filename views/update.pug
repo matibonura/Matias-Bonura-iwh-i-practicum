@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Agregar un nuevo Programa Estudiantil
+
+    form(action="/update-cobj", method="POST")
+      label(for="nombre_del_programa") Nombre del programa:
+      input(type="text", name="nombre_del_programa", id="nombre_del_programa", required)
+
+      label(for="estado") Estado:
+      input(type="text", name="estado", id="estado", required)
+
+      label(for="modalidad") Modalidad:
+      input(type="text", name="modalidad", id="modalidad", required)
+
+      button(type="submit") Crear programa
+
+    a(href="/") Volver al inicio
