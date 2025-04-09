@@ -1,0 +1,41 @@
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 Agregar un nuevo Programa Estudiantil
+
+form(action="/update-cobj", method="POST")
+  div
+    label(for="nombre_del_programa") Nombre del programa:
+    br
+    input(type="text", name="nombre_del_programa", id="nombre_del_programa", required)
+
+  br
+
+  div
+    label(for="estado") Estado:
+    br
+    select(name="estado", id="estado", required)
+      option(value="Activo") Activo
+      option(value="Inactivo") Inactivo
+
+  br
+
+  div
+    label(for="modalidad") Modalidad:
+    br
+    select(name="modalidad", id="modalidad", required)
+      option(value="Virtual") Virtual
+      option(value="Presencial") Presencial
+
+  br
+
+  div
+    button(type="submit") Crear programa
+
+  br
+
+  a(href="/") Volver al inicio

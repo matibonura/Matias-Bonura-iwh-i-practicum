@@ -2,6 +2,9 @@ const express = require('express');
 const axios = require('axios');
 const app = express();
 
+
+
+
 require('dotenv').config();
 
 app.set('view engine', 'pug');
@@ -12,18 +15,19 @@ app.use(express.json());
 // * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
 
 const PRIVATE_APP_ACCESS = process.env.HUBSPOT_API_KEY;
-const OBJECT_TYPE = 'programa_estudiantil';
+const OBJECT_TYPE = '2-43122851';
 const API_URL = `https://api.hubapi.com/crm/v3/objects/${OBJECT_TYPE}`;
 const HEADERS = {
-  Authorization: `Bearer ${HUBSPOT_API_KEY}`,
+  Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
   'Content-Type': 'application/json'
 };
+
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 app.get('/', async (req, res) => {
     try {
-      const response = await axios.get(`${API_URL}?properties=propiedad1,propiedad2,propiedad3`, { headers: HEADERS });
+      const response = await axios.get(`${API_URL}?properties=nombre_del_programa,estado,modalidad`, { headers: HEADERS });
       const data = response.data.results;
       res.render('homepage', { title: 'Homepage | HubSpot I Practicum', data });
     } catch (error) {
@@ -41,13 +45,17 @@ app.get('/update-cobj', (req, res) => {
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 app.post('/update-cobj', async (req, res) => {
-    const { prop1, prop2, prop3 } = req.body;
+    const { nombre_del_programa, estado, modalidad } = req.body;
+
+    if (!nombre_del_programa || !estado || !modalidad) {
+        return res.status(400).send('Todos los campos son obligatorios');
+      }
   
     const newRecord = {
       properties: {
-        Nombre: nombre_del_programa,
-        Estado: estado,
-        Modalidad: modalidad
+        nombre_del_programa,
+        estado,
+        modalidad
       }
     };
   
